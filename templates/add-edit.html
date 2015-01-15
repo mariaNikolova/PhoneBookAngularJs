@@ -10,7 +10,8 @@
     <input type="text" id="phoneNumber" ng-model="phoneData.number">
   </p>
   <p class="buttons">
-    <a href="" ng-click="add(phoneData)" class="button">Add</a>
+    <a href="" ng-if="isAdd" ng-click="add(phoneData)" class="button">Add</a>
+    <a href="" ng-if="!isAdd" ng-click="edit(phoneData)" class="button">Edit</a>
     <a href="#/" class="button">Cancel</a>
   </p>
 </div>

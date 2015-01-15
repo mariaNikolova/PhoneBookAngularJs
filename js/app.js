@@ -28,12 +28,16 @@ app.config(function ($routeProvider) {
     , controller: 'LoginCtrl'
   })
   .when('/add', {
-    templateUrl: 'templates/add.html'
-    , controller: 'AddCtrl'
+    templateUrl: 'templates/add-edit.html'
+    , controller: 'AddEditCtrl'
   })
   .when('/listPhoneBook', {
     templateUrl: 'templates/list.html'
     , controller: 'ListPhoneBookCtrl'
+  })
+  .when('/edit/:objectId', {
+    templateUrl: 'templates/add-edit.html'
+    , controller: 'AddEditCtrl'
   })
   .otherwise(
     { redirectTo: '/' }

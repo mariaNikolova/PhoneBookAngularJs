@@ -20,10 +20,18 @@ app.factory('phoneSrvc',
           }
          ).save(userData);
       }, getPhone: function(objectId) {
-          //console.log("uraaaa");
-          //.setAuthHeaders();
           return $resource(baseSrvcUrl + '1/classes/Phone' + ((objectId) ? "/" + objectId: "")).get();
-    }
+       },
+       editPhone: function(objectId, phoneData){
+          return $resource(baseSrvcUrl + "1/classes/Phone/" + objectId, {
+            person:"@person"
+             , number: "@number"
+            }, {
+              update: {
+                method: 'PUT'
+              }
+            }).update(phoneData);
+       }
   }
 }
 );
