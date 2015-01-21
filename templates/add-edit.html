@@ -11,7 +11,7 @@
   </p>
   <p class="buttons">
     <a href="" ng-if="isAdd" ng-click="add(phoneData)" class="button">Add</a>
-    <a href="" ng-if="isEdit" ng-click="edit(phoneData)" class="button">Edit</a>
+    <a href="#/edit/:objectId" ng-if="isEdit" ng-click="edit(phoneData)" class="button">Edit</a>
     <a href="" ng-if="!isAdd && !isEdit" ng-click="delete(phoneData)" class="button">Delete</a>
     <a href="#/" class="button">Cancel</a>
   </p>
