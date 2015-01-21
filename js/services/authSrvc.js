@@ -1,5 +1,4 @@
 'use strict';
-
 app.factory('authSrvc',
   function ($http, $resource, baseSrvcUrl, parseAppId, parseRestApiKey) {
     return {
