@@ -1,6 +1,6 @@
 <!-- Registration screen -->
 <div id="register-form" class="dialog-box">
-  <h1>Register</h1>
+  <h1>{{pageTitle}}</h1>
   <p>
     <label for="username">Username:</label>
     <input type="text" id="username" ng-model="userData.username"/>
@@ -14,7 +14,8 @@
     <input type="text" id="fullName" ng-model="userData.fullName" />
   </p>
   <p class="buttons">
-    <a href="" ng-click="register(userData)" class="button">Register</a>
+    <a href="" ng-if="isRegister" ng-click="register(userData)" class="button">Register</a>
+    <a href="" ng-if="!isRegister" ng-click="edit(userData)" class="button">Edit Profile</a>
     <a href="#/login" class="link">Login</a>
   </p>
 </div>

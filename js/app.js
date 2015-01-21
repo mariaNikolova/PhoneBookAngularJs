@@ -39,13 +39,21 @@ app.config(function ($routeProvider) {
     templateUrl: 'templates/add-edit.html'
     , controller: 'AddEditCtrl'
   })
+  .when('/delete/:objectId', {
+    templateUrl: 'templates/add-edit.html'
+    , controller: 'AddEditCtrl'
+  })
+  .when('/editProfile', {
+    templateUrl: 'templates/register.html'
+    , controller: 'RegisterCtrl'
+  })
   .otherwise(
     { redirectTo: '/' }
   )
   ;
 });
 
-//app.run(function ($rootScope, $location, authSrvc) {
+app.run(function ($rootScope, $location, authSrvc) {
 //   $rootScope.isPublic = ($location.$$path == '/')||($location.$$path == '/user/home');
 //   // $rootScope.isAdmin = authSrvc.isAdmin();
 //   $rootScope.isAdmin =true;
@@ -53,7 +61,7 @@ app.config(function ($routeProvider) {
 //   $rootScope.isNormalUser = false;
 //   $rootScope.displayAdStatus = $location.$$path == '/user/ads';
 //   $rootScope.nav = $location.$$path;
-//  $rootScope.$on('$locationChangeStart', function (event) {
+ $rootScope.$on('$locationChangeStart', function (event) {
 //     // $rootScope.isNormalUser = authSrvc.isNormalUser();
 //   $rootScope.isNormalUser = false;
 //     // $rootScope.isAdmin = authSrvc.isAdmin();
@@ -61,14 +69,14 @@ app.config(function ($routeProvider) {
 //     $rootScope.isPublic = ($location.$$path == '/')||($location.$$path == '/user/home');
 //     $rootScope.displayAdStatus = $location.$$path == '/user/ads';
 //     $rootScope.nav = $location.$$path;
- //   if ( ($location.path().indexOf("/add") != -1
-  //    ) && !authSrvc.isLoggedIn()) {
-//       // Authorization check: anonymous site visitors cannot access user routes
- //     $location.path("/");
-  //  }
+   if ( ($location.path().indexOf("/add") != -1
+     ) && !authSrvc.isLoggedIn()) {
+      // Authorization check: anonymous site visitors cannot access user routes
+     $location.path("/");
+   }
 //     // if ($location.path().indexOf("/admin/") != -1 && !authSrvc.isAdmin()) {
 //     //   // Authorization check: anonymous site visitors cannot access user routes
 //     //   $location.path("/");
     // }
-//  });
-//});
+ });
+});

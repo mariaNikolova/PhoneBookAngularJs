@@ -4,6 +4,7 @@
 app.controller('AddEditCtrl',
   function ($scope, $rootScope, $location, $routeParams, phoneSrvc, notifySrvc, authSrvc) {
     $scope.isAdd = ($location.$$path == '/add');
+    $scope.isEdit = $location.$$path.indexOf('/add') != -1;
     if($scope.isAdd){
       $rootScope.pageTitle = "Add Phone";
       $scope.phoneData = {};
@@ -20,8 +21,7 @@ app.controller('AddEditCtrl',
           });
       };
     }
-    else{
-      $rootScope.pageTitle = "Edit Phone";
+    else {
       phoneSrvc.getPhone($routeParams.objectId).$promise
       .then(function (data) {
         $scope.phoneData = data;
@@ -29,16 +29,31 @@ app.controller('AddEditCtrl',
         notifySrvc.showError("Get Phone failed", err);
         $location.path('/listPhoneBook');
       });
-
-      $scope.edit = function(phoneData){
-        phoneSrvc.editPhone($routeParams.objectId, phoneData)
-        .$promise
-        .then(function(data){
-          notifySrvc.showInfo("Edit successful!");
-          $location.path('/listPhoneBook');
-        }, function(err){
-          notifySrvc.showError("failed",err);
-        })
+      if ($scope.isEdit) {
+        $rootScope.pageTitle = "Edit Phone";
+        $scope.edit = function(phoneData){
+          phoneSrvc.editPhone($routeParams.objectId, phoneData)
+          .$promise
+          .then(function(data){
+            notifySrvc.showInfo("Edit successful!");
+            $location.path('/listPhoneBook');
+          }, function(err){
+            notifySrvc.showError("Edit failed",err);
+          })
+        };      
+      } else {
+        $rootScope.pageTitle = "Delete Phone";
+        $scope.subTitle = "Confirm " + $rootScope.pageTitle + "?";
+        $scope.delete = function(phoneData){
+          phoneSrvc.deletePhone($routeParams.objectId, phoneData)
+            .$promise
+            .then(function(data){
+              notifySrvc.showInfo("delete successful");
+              $location.path("/listPhoneBook");
+            }, function(err){
+              notifySrvc.showError("Delete failed", err);
+            })
+        }              
       }
     }
   }

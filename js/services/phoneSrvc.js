@@ -31,6 +31,9 @@ app.factory('phoneSrvc',
                 method: 'PUT'
               }
             }).update(phoneData);
+       },
+       deletePhone: function(objectId, phoneData){
+          return $resource(baseSrvcUrl +  "1/classes/Phone/" + objectId).delete(phoneData);
        }
   }
 }
